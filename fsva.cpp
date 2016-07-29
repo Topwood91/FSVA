@@ -300,22 +300,6 @@ void fuwa::map_read2(Read	&R1, Read  &R2) {
 	if (vr.size()>1 && vrt.size()>1) {
 		next = best;
 		next2=best2;
-		//vr.insert(vr.end(),vr2.begin(),vr2.end());
-		//vrt.insert(vrt.end(),vrt2.begin(),vrt2.end());
-		/*bool flag=false;
-		for(size_t i=0;i<vr.size();i++){
-            for(size_t j=0;j<vrt.size();j++){
-                if((vr[i].str!=vrt[j].str) && ((vr[i].pos>vrt[j].pos&&vr[i].pos-vrt[j].pos<=pairdis) || (vr[i].pos<=vrt[j].pos&&vrt[j].pos-vr[i].pos<=pairdis))){
-                    choosen1=vr[i];
-                    choosen2=vrt[j];
-                    next=best-1;
-                    next2=best2-1;
-                    flag=true;
-                    break;
-                }
-            }
-            if(flag)break;
-		}*/
 	}
 	else if(vr.size()==1 && vrt.size()>1){
         next2=best2;
@@ -427,7 +411,7 @@ void	fuwa::query(string	&Q,	vector<Region>	&R, vector<Region>	&R2, char	S,	size_
 		k=(k<<2)+(Q[i]==4?rand()&3:Q[i]);
 		size_t	h=(k&mask)%mod,	b=keyv[h],	e=keyv[h+1];
 		if(e-b>max_occ)	continue;
-		for(size_t	j=b;	j<e;	j++)	hit.push_back(posv[j]+kmer-1-i);
+		for(size_t	j=b;	j<e;	j++)	hit.push_back(posv[j]+kmer>=1+i?posv[j]+kmer-1-i:0);
 	}
 	radix_sort(&hit[0],	&hit[0]+hit.size());
 	for(size_t	i=0;	i<hit.size();){
